@@ -101,7 +101,6 @@ function iniciarJuego() {
     
     botonTierra.addEventListener('click', ataqueTierra)
 
-    
     botonReiniciar.addEventListener('click', reiniciarJuego)
 }
 
