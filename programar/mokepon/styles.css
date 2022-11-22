@@ -23,13 +23,10 @@ body {
   font-size: 20px;
 }
 
-
 .tarjetas, .tarjetas-ataques {
   display: flex;
   gap: 10px;
 }
-
-
 
 .tarjeta-de-mokepon {
   width: 180px;
@@ -45,8 +42,8 @@ body {
 }
 
 .tarjeta-de-mokepon img {
-    width: 80px;
-  }
+  width: 80px;
+}
 
 #boton-mascota {
   width: 180px;
@@ -118,13 +115,8 @@ input:checked + label {
   align-items: center;
 }
 
-@media (max-width: 600px){/*360px) {*/
+@media (max-width: 360px) {
   .tarjetas, .tarjetas-ataques {
     flex-direction: column;
   }
-
-  .tarjeta-de-mokepon {
-    width: 250px;
-  }
-
 }
