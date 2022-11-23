@@ -120,3 +120,15 @@ input:checked + label {
     flex-direction: column;
   }
 }
+
+#ver-mapa{
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#mapa{
+  border: 1px solid white;
+  width:500px;
+  height: 300px;
+}

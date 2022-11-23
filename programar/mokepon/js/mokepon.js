@@ -1,22 +1,19 @@
 const sectionSeleccionarAtaque = document.getElementById('seleccionar-ataque')
 const sectionReiniciar = document.getElementById('reiniciar')
 const botonMascotaJugador = document.getElementById('boton-mascota')
-
 const botonReiniciar = document.getElementById('boton-reiniciar')
-
 const sectionSeleccionarMascota = document.getElementById('seleccionar-mascota')
 const spanMascotaJugador = document.getElementById('mascota-jugador')
-
 const spanMascotaEnemigo = document.getElementById('mascota-enemigo')
-
 const spanVictoriasJugador = document.getElementById('victorias-jugador')
 const spanVictoriasEnemigo = document.getElementById('victorias-enemigo')
-
 const sectionMensajes = document.getElementById('resultado')
 const ataquesDelJugador = document.getElementById('ataques-del-jugador')
 const ataquesDelEnemigo = document.getElementById('ataques-del-enemigo')
 const contenedorTarjetas = document.getElementById('contenedorTarjetas')
 const contenedorAtaques = document.getElementById('contenedorAtaques')
+const sectionVerMapa = document.getElementById('ver-mapa')
+const mapa = document.getElementById('mapa')
 
 let botonTierra 
 let botonFuego 
@@ -85,7 +82,7 @@ mokepones.push(hipodoge,capipepo,ratigueya)
 function iniciarJuego() {
     
     sectionSeleccionarAtaque.style.display = 'none'
-
+    sectionVerMapa.style.display = 'none'
     mokepones.forEach((mokepon) => {
         opcionDeMokepones = `
         <input type="radio" name="mascota" id=${mokepon.nombre} />
@@ -108,7 +105,9 @@ function iniciarJuego() {
 function seleccionarMascotaJugador() {
     
     sectionSeleccionarMascota.style.display = 'none'
-    sectionSeleccionarAtaque.style.display = 'flex'
+    //sectionSeleccionarAtaque.style.display = 'flex'
+    sectionVerMapa.style.display = 'flex'
+
     if (inputHipodoge.checked) {
         spanMascotaJugador.innerHTML = inputHipodoge.id
         mascotaEscogidaJugador = inputHipodoge.id
