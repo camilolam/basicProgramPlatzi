@@ -93,26 +93,16 @@ function iniciarJuego() {
     })
     
     botonMascotaJugador.addEventListener('click', seleccionarMascotaJugador)
-
-    
     botonFuego.addEventListener('click', ataqueFuego)
-    
     botonAgua.addEventListener('click', ataqueAgua)
-    
     botonTierra.addEventListener('click', ataqueTierra)
-
     botonReiniciar.addEventListener('click', reiniciarJuego)
 }
 
 function seleccionarMascotaJugador() {
     
     sectionSeleccionarMascota.style.display = 'none'
-    
-    
     sectionSeleccionarAtaque.style.display = 'flex'
-    
-    
-    
     if (inputHipodoge.checked) {
         spanMascotaJugador.innerHTML = inputHipodoge.id
     } else if (inputCapipepo.checked) {
@@ -122,20 +112,12 @@ function seleccionarMascotaJugador() {
     } else {
         alert('Selecciona una mascota')
     }
-
     seleccionarMascotaEnemigo()
 }
 
 function seleccionarMascotaEnemigo() {
-    let mascotaAleatoria = aleatorio(1,3)
-
-    if (mascotaAleatoria == 1) {
-        spanMascotaEnemigo.innerHTML = 'Hipodoge'
-    } else if (mascotaAleatoria == 2) {
-        spanMascotaEnemigo.innerHTML = 'Capipepo'
-    } else {
-        spanMascotaEnemigo.innerHTML = 'Ratigueya'
-    }
+    let mascotaAleatoria = aleatorio(0,mokepones.length -1)
+    spanMascotaEnemigo.innerHTML = mokepones[mascotaAleatoria].nombre
 }
 
 function ataqueFuego() {
@@ -152,7 +134,7 @@ function ataqueTierra() {
 }
 
 function ataqueAleatorioEnemigo() {
-    let ataqueAleatorio = aleatorio(1,3)
+    let ataqueAleatorio = aleatorio(1,mokepones[0].ataques.length)
     
     if (ataqueAleatorio == 1) {
         ataqueEnemigo = 'FUEGO'
@@ -166,7 +148,6 @@ function ataqueAleatorioEnemigo() {
 }
 
 function combate() {
-    
     
     if(ataqueEnemigo == ataqueJugador) {
         crearMensaje("EMPATE")
@@ -200,32 +181,21 @@ function revisarVidas() {
 }
 
 function crearMensaje(resultado) {
-    
-    
     let nuevoAtaqueDelJugador = document.createElement('p')
     let nuevoAtaqueDelEnemigo = document.createElement('p')
 
     sectionMensajes.innerHTML = resultado
     nuevoAtaqueDelJugador.innerHTML = ataqueJugador
     nuevoAtaqueDelEnemigo.innerHTML = ataqueEnemigo
-
     ataquesDelJugador.appendChild(nuevoAtaqueDelJugador)
     ataquesDelEnemigo.appendChild(nuevoAtaqueDelEnemigo)
 }
 
 function crearMensajeFinal(resultadoFinal) {
-    
-    
     sectionMensajes.innerHTML = resultadoFinal
-
-    
     botonFuego.disabled = true
-    
     botonAgua.disabled = true
-    
     botonTierra.disabled = true
-
-    
     sectionReiniciar.style.display = 'block'
 }
 
