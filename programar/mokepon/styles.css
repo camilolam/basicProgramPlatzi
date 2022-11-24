@@ -76,7 +76,7 @@ input:checked + label {
   box-sizing: border-box;
   border-radius: 20px;
   border-color: transparent;
-  width: 180px;
+  width: 80px;
   color: white;
   font-family: 'Poppins', sans-serif;
 }
@@ -127,8 +127,13 @@ input:checked + label {
   justify-content: center;
 }
 
-#mapa{
-  border: 1px solid white;
-  width:500px;
-  height: 300px;
+#ver-mapa button{
+  width: 180px;
+  height: 40px;
+  border-radius: 20px;
+  background: transparent;
+  border: 2px solid white;
+  color: white;
+  font-family: 'Poppins', sans-serif;
+  margin-top: 30px;
 }
