@@ -37,6 +37,8 @@ let mascotaEscogidaEnemigo
 let indexAtaqueJugador
 let indexAtaqueEnemigo
 let lienzo = mapa.getContext("2d")
+let mokeponElegido
+let intervalo
 
 class Mokepon {
     constructor(nombre, foto, vida) {
@@ -48,6 +50,10 @@ class Mokepon {
         this.y = 30
         this.ancho = 80
         this.alto = 80
+        this.mapaFoto = new Image()
+        this.mapaFoto.src = foto
+        this.velocidadX = 0
+        this.velocidadY = 0
     }
 }
 
@@ -112,18 +118,7 @@ function seleccionarMascotaJugador() {
     sectionSeleccionarMascota.style.display = 'none'
     //sectionSeleccionarAtaque.style.display = 'flex'
     sectionVerMapa.style.display = 'flex'
-
-    let imagenCapipepo = new Image()
-    imagenCapipepo.src = capipepo.foto
-    lienzo.drawImage(
-        imagenCapipepo,
-        20,
-        40,
-        100,
-        100
-    )
-    
-    lienzo.fillRect(5,15,20,40)
+    intervalo = setInterval(pintaPersonaje,50)
 
     if (inputHipodoge.checked) {
         spanMascotaJugador.innerHTML = inputHipodoge.id
@@ -146,6 +141,7 @@ function extraerAtaques(mascotaEscogidaJugador){
     for (var i = 0; i< mokepones.length; i++) {
         if(mokepones[i].nombre === mascotaEscogidaJugador){
             ataques = mokepones[i].ataques
+            mokeponElegido = mokepones[i]
         }
     }
     mostrarAtaques(ataques)
@@ -288,6 +284,44 @@ function reiniciarJuego() {
 
 function aleatorio(min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min)
+}
+
+function pintaPersonaje(){
+    mokeponElegido.x += mokeponElegido.velocidadX
+    mokeponElegido.y += mokeponElegido.velocidadY
+    lienzo.clearRect(0,0,mapa.width,mapa.height)
+    lienzo.drawImage(
+        mokeponElegido.mapaFoto,
+        mokeponElegido.x,
+        mokeponElegido.y,
+        mokeponElegido.ancho,
+        mokeponElegido.alto
+    )
+    lienzo.fillRect(5,15,20,40)
+}
+function detenerMovimiento(){
+    mokeponElegido.velocidadX = 0
+    mokeponElegido.velocidadY = 0
+}
+function moverArriba(){
+    if(mokeponElegido.velocidadY<0){
+        mokeponElegido.velocidadY = 0
+    }else{
+        mokeponElegido.velocidadY-=5
+    }
+}
+function moverAbajo(){
+    mokeponElegido.velocidadY+=5
+}
+function moverIzquierda(){
+    if(mokeponElegido.velocidadX<0){
+        mokeponElegido.velocidadX = 0
+    }else{
+        mokeponElegido.velocidadX-=5
+    }
+}
+function moverDerecha(){
+    mokeponElegido.velocidadX+=5
 }
 
 window.addEventListener('load', iniciarJuego)
