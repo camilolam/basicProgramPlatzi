@@ -36,6 +36,7 @@ let mascotaEscogidaEnemigo
 
 let indexAtaqueJugador
 let indexAtaqueEnemigo
+let lienzo = mapa.getContext("2d")
 
 class Mokepon {
     constructor(nombre, foto, vida) {
@@ -43,6 +44,10 @@ class Mokepon {
         this.foto = foto
         this.vida = vida
         this.ataques = []
+        this.x = 20
+        this.y = 30
+        this.ancho = 80
+        this.alto = 80
     }
 }
 
@@ -108,6 +113,18 @@ function seleccionarMascotaJugador() {
     //sectionSeleccionarAtaque.style.display = 'flex'
     sectionVerMapa.style.display = 'flex'
 
+    let imagenCapipepo = new Image()
+    imagenCapipepo.src = capipepo.foto
+    lienzo.drawImage(
+        imagenCapipepo,
+        20,
+        40,
+        100,
+        100
+    )
+    
+    lienzo.fillRect(5,15,20,40)
+
     if (inputHipodoge.checked) {
         spanMascotaJugador.innerHTML = inputHipodoge.id
         mascotaEscogidaJugador = inputHipodoge.id
@@ -141,9 +158,6 @@ function mostrarAtaques(ataques){
         `
         contenedorAtaques.innerHTML+=ataquesMokepon
     })
-    /*botonTierra = document.getElementById('boton-tierra')
-    botonFuego = document.getElementById('boton-fuego')
-    botonAgua = document.getElementById('boton-agua')*/
     botones = document.querySelectorAll('.BAtaque')
 }
 
