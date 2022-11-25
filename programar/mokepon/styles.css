@@ -25,7 +25,8 @@ body {
 
 .tarjetas, .tarjetas-ataques {
   display: flex;
-  gap: 10px;
+
+  gap: 30px;
 }
 
 .tarjeta-de-mokepon {
@@ -39,6 +40,7 @@ body {
   justify-content: center;
   align-items: center;
   color: white;
+  margin:10px;
 }
 
 .tarjeta-de-mokepon img {
@@ -115,7 +117,7 @@ input:checked + label {
   align-items: center;
 }
 
-@media (max-width: 360px) {
+@media (max-width: 600px) {
   .tarjetas, .tarjetas-ataques {
     flex-direction: column;
   }
