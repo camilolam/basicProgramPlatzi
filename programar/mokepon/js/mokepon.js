@@ -163,10 +163,22 @@ function iniciarJuego() {
      inputCapipepo = document.getElementById('Capipepo')
      inputRatigueya = document.getElementById('Ratigueya')
      botonReiniciar.addEventListener('click', reiniciarJuego)
-     
     })
-    
+   
     botonMascotaJugador.addEventListener('click', seleccionarMascotaJugador)
+    unirseAlJuego()
+}
+
+function unirseAlJuego(){
+    fetch('http://192.168.0.107:8000/unirse') // hace una petición get por defecto, si es necesario se le debe decir cuando es post
+        .then(function(res){
+            if(res.ok){
+                res.text()
+                    .then(function (respuesta){
+                        console.log(respuesta)
+                    })
+            }
+        })
 }
 
 function seleccionarMascotaJugador() {
