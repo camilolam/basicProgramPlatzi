@@ -70,7 +70,9 @@ app.post("/mokepon/:jugadorId/pos",(req,res)=>{
     if (jugadorIndex >= 0){
         jugadores[jugadorIndex].actualizarPosicion(x,y)
     }
-    res.end()
+
+    const enemigos = jugadores.filter((enemigo)=>jugadorId!== enemigo.id)
+    res.send({enemigos})
 })
 
 app.listen(8000,()=>{
