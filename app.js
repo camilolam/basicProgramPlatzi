@@ -1,24 +1,76 @@
 const express = require('express')
+const cors = require('cors')
 // configuración del servidor
 const app = express()
+app.use(cors()) //nos ayuda a que no haya problemas con el origen de las aplicaciones que vana consumir las apis
+app.use(express.json()) //nos permite configurar que la información que se puede recibir en el servidor, venga en formato json
+
+
 let jugadores = []
 class Jugador{
     constructor(id){
         this.id = id
     }
+
+    asignarMokepon(mokepon) {
+        this.mokepon=mokepon
+    }
+
+    actualizarPosicion(x,y){
+        this.x=x
+        this.y=y
+    }
+}
+
+class Mokepon {
+    constructor(nombre){
+        this.nombre=nombre
+    }
+    
 }
 // estructura para las peticiones al servidor
 app.get('/',(req, res)=>{ 
     res.send('Chingón')
 })
 
+
 app.get('/unirse',(req, res)=>{ 
     let id = `${aleatorio(0,100)}`
     const jugador = new Jugador(id)
     jugadores.push(jugador)
     res.setHeader("Access-Control-Allow-Origin","*")
-    //console.log(jugadores.length)
-    res.send(`El número de jugadores en el momento es de ${jugadores.length} tu id es ${id}`)
+    console.log(`Nuevo jugagor!! `)
+    console.log(`En el momento hay ${jugadores.length} jugadores`)
+    res.send(id)
+})
+
+app.post("/mokepon/:jugadorId",(req,res) => {
+    const jugadorId = req.params.jugadorId || ""// acceder a la información que está en a url
+    const nombreMokepon = req.body.mokepon || ""
+
+    const mokepon = new Mokepon(nombreMokepon)
+
+    const jugadorIndex = jugadores.findIndex((jugador)=>jugadorId===jugador.id)
+
+    if (jugadorIndex >= 0){
+        jugadores[jugadorIndex].asignarMokepon(mokepon)
+    }
+    console.log(jugadores)
+    console.log(`id: ${jugadorId}`)
+    res.end()
+})
+
+app.post("/mokepon/:jugadorId/pos",(req,res)=>{
+    const jugadorId = req.params.jugadorId || ""// acceder a la información que está en a url
+    const x = req.body.x || 0
+    const y = req.body.y || 0
+
+    const jugadorIndex = jugadores.findIndex((jugador)=>jugadorId===jugador.id)
+
+    if (jugadorIndex >= 0){
+        jugadores[jugadorIndex].actualizarPosicion(x,y)
+    }
+    res.end()
 })
 
 app.listen(8000,()=>{

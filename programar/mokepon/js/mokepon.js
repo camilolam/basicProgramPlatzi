@@ -46,6 +46,8 @@ backgroundImage.src = './assets/mokemap.png'
 let alturaDeseada
 let anchoMapa = window.innerWidth - 20
 const anchoMax = 500
+const urlServidor = 'http://192.168.0.107:8000'
+let jugadorId = null
 
 anchoMapa = anchoMapa>anchoMax?anchoMax:anchoMapa
 
@@ -170,16 +172,19 @@ function iniciarJuego() {
 }
 
 function unirseAlJuego(){
-    fetch('http://192.168.0.107:8000/unirse') // hace una petición get por defecto, si es necesario se le debe decir cuando es post
+    fetch(`${urlServidor}/unirse`) // hace una petición get por defecto, si es necesario se le debe decir cuando es post
         .then(function(res){
             if(res.ok){
                 res.text()
                     .then(function (respuesta){
+                        jugadorId = respuesta
                         console.log(respuesta)
                     })
             }
         })
 }
+
+
 
 function seleccionarMascotaJugador() {
     
@@ -200,7 +205,20 @@ function seleccionarMascotaJugador() {
     } else {
         alert('Selecciona una mascota')
     }
+    seleccionarMokepon(mascotaEscogidaJugador)
     extraerAtaques(mascotaEscogidaJugador)
+}
+
+function seleccionarMokepon(mascotaJugador){
+    fetch(`${urlServidor}/mokepon/${jugadorId}`,{
+        method:"post",
+        headers:{
+            "Content-Type":"application/json"
+        },
+        body:JSON.stringify({
+            mokepon:mascotaJugador
+        })
+    })
 }
 
 function extraerAtaques(mascotaEscogidaJugador){
@@ -353,6 +371,19 @@ function aleatorio(min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min)
 }
 
+function enviarPosicion(x,y){
+    fetch(`${urlServidor}/mokepon/${jugadorId}/pos`,{
+        method:"post",
+        headers:{
+            "Content-Type":"application/json"
+        },
+        body:JSON.stringify({
+            x, //notacion que js entiende que el valor se llama igual que la propiedad
+            y
+        })
+    })
+}
+
 function pintarCanvas(){
     mokeponElegido.x += mokeponElegido.velocidadX
     mokeponElegido.y += mokeponElegido.velocidadY
@@ -365,6 +396,7 @@ function pintarCanvas(){
         mapa.height
     )
     mokeponElegido.pintarMokepon()
+    enviarPosicion(mokeponElegido.x,mokeponElegido.y)
     capipepoEnemigo.pintarMokepon()
     ratigueyaEnemigo.pintarMokepon()
     hipodogeEnemigo.pintarMokepon()
@@ -374,6 +406,7 @@ function pintarCanvas(){
         revisarColision(hipodogeEnemigo)
     }
 }
+
 function detenerMovimiento(){
     mokeponElegido.velocidadX = 0
     mokeponElegido.velocidadY = 0
