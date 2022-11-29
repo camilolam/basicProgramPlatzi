@@ -154,9 +154,9 @@ function unirseAlJuego(){
 
 function seleccionarMascotaJugador() {
     
-    sectionSeleccionarMascota.style.display = 'none'
+   
     //sectionSeleccionarAtaque.style.display = 'flex'
-    sectionVerMapa.style.display = 'flex'
+    
     iniciarMapa()
 
     if (inputHipodoge.checked) {
@@ -170,7 +170,10 @@ function seleccionarMascotaJugador() {
         mascotaEscogidaJugador = inputRatigueya.id
     } else {
         alert('Selecciona una mascota')
+        return
     }
+    sectionSeleccionarMascota.style.display = 'none'
+    sectionVerMapa.style.display = 'flex'
     seleccionarMokepon(mascotaEscogidaJugador)
     extraerAtaques(mascotaEscogidaJugador)
 }
@@ -250,19 +253,18 @@ function enviarAtaques(){
 }
 
 function obtenerAtaques(){
-    fetch(`${urlServidor}/mokepon/${jugadorId}/ataques`)
-        .then(function(respueta){
-            if (respueta.ok){
+    fetch(`${urlServidor}/mokepon/${enemigoId}/ataques`)
+        .then(function(res){
+            if (res.ok){
                 res.json()
                     .then(function({ataques}){
                         if(ataques.length === 5 ){
+                            ataqueEnemigo = ataques
                             combate()
-                            console.log(ataques)
                         }
                     })
             }
         })
-
 }
 // ----------- Seccion para el enemigo --------------------------
 

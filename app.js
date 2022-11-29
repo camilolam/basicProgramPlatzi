@@ -2,8 +2,11 @@ const express = require('express')
 const cors = require('cors')
 // configuración del servidor
 const app = express()
+
+app.use(express.static('programar'))
 app.use(cors()) //nos ayuda a que no haya problemas con el origen de las aplicaciones que vana consumir las apis
 app.use(express.json()) //nos permite configurar que la información que se puede recibir en el servidor, venga en formato json
+
 
 
 let jugadores = []
@@ -32,12 +35,6 @@ class Mokepon {
     }
     
 }
-// estructura para las peticiones al servidor
-app.get('/',(req, res)=>{ 
-    res.send('Chingón')
-})
-
-
 app.get('/unirse',(req, res)=>{ 
     let id = `${aleatorio(0,100)}`
     const jugador = new Jugador(id)
@@ -91,12 +88,12 @@ app.post("/mokepon/:jugadorId/ataques",(req,res)=>{
     res.end()
 })
 
-app.post("/mokepon/:jugadorId/ataques",(req,res)=>{
+app.get("/mokepon/:jugadorId/ataques",(req,res)=>{
     const jugadorId = req.params.jugadorId || ""
     const jugador = jugadores.find((jugador)=>jugadorId === jugador.id)
 
     res.send({
-        ataques:jugador.ataques
+        ataques:jugador.ataques || []
     })
 })
 

@@ -7,7 +7,7 @@
     </head>
     <body>
         <section id="seleccionar-mascota">
-            <h1 class="titulo">Mokepono</h1> 
+            <h1 class="titulo">Mokepon</h1> 
 
             <h2 class="subtitulo">Elige tu mascota:</h2>
 
@@ -21,11 +21,11 @@
         <section id= "ver-mapa">
             <h2 class="subtitulo">Recorre el mapa con tu mokepon</h2>
             <canvas id="mapa"></canvas>
-            <button onmouseup="detenerMovimiento() " onmousedown = "moverArriba()"" class="boton-de-ataque">Arriba</button>
+            <button ontouchstart="moverArriba()" ontouchend = "detenerMovimiento()" onmouseup="detenerMovimiento() " onmousedown = "moverArriba()"" class="boton-de-ataque">Arriba</button>
             <div class="botones-abajo">
-                <button onmouseup="detenerMovimiento() " onmousedown = "moverIzquierda()" class="boton-de-ataque">Izquierda</button>
-                <button onmouseup="detenerMovimiento() " onmousedown = "moverAbajo()" class="boton-de-ataque">Abajo</button>
-                <button onmouseup="detenerMovimiento() " onmousedown = "moverDerecha()" class="boton-de-ataque">Derecha</button>
+                <button ontouchstart="moverIzquierda()" ontouchend = "detenerMovimiento()" onmouseup="detenerMovimiento() " onmousedown = "moverIzquierda()" class="boton-de-ataque">Izquierda</button>
+                <button ontouchstart="moverAbajo()" ontouchend = "detenerMovimiento()" onmouseup="detenerMovimiento() " onmousedown = "moverAbajo()" class="boton-de-ataque">Abajo</button>
+                <button ontouchstart="moverDerecha()" ontouchend = "detenerMovimiento()" onmouseup="detenerMovimiento() " onmousedown = "moverDerecha()" class="boton-de-ataque">Derecha</button>
             </div>
         </section>
 
