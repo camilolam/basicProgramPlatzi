@@ -10,7 +10,7 @@ app.use(express.json()) //nos permite configurar que la información que se pued
 
 
 let jugadores = []
-class Jugador{
+class Jugador{ 
     constructor(id){
         this.id = id
     }

@@ -4,7 +4,7 @@
   "description": "Es un juego para el curso inicial de programacion en platzi",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodemon app.js"
   },
   "repository": {
     "type": "git",
