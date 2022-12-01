@@ -1,3 +1,4 @@
+// Está es la configuración del servidor
 const express = require('express')
 const cors = require('cors')
 // configuración del servidor
